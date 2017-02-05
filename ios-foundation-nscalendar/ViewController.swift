@@ -12,12 +12,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let tokyoTimeZone = "Asia/Tokyo"
-    var calendar = NSCalendar.current
+    private let tokyoTimeZone = "Asia/Tokyo"
+    private let jpLocal = "ja"
+    private var calendar = NSCalendar.current
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupLocal()
         setupTimeZone()
         renderDate()
     }
@@ -27,6 +29,11 @@ class ViewController: UIViewController {
     /// TimeZoneを設定する
     private func setupTimeZone() {
         calendar.timeZone = TimeZone(identifier: tokyoTimeZone)!
+    }
+    
+    /// Localeの設定
+    private func setupLocal() {
+        calendar.locale = Locale(identifier: jpLocal)
     }
     
     /// TimeZoneのIDを取得する
@@ -84,6 +91,21 @@ class ViewController: UIViewController {
     private func renderDate() {
         
         //Do Something
+    }
+    
+    /// ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+    private func renderMonthSymbols() {
+        print(calendar.monthSymbols)
+    }
+    
+    /// ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+    private func renderWeekdaySymbols() {
+        print(calendar.weekdaySymbols)
+    }
+
+    /// ["日", "月", "火", "水", "木", "金", "土"]
+    private func renderShortWeekdaySymbols() {
+        print(calendar.shortWeekdaySymbols)
     }
     
     /// 該当の日付に更新する
