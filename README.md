@@ -20,7 +20,7 @@ NSTimeZone、NSLocale、Date、DateFormatter、DateComponent
 |メソッド名|説明|サンプル|
 |---|---|---|
 |component | 日付を返す | calendar.component(.day, from: date) |
-|range | カレンダーの特定の範囲の情報を返す | calendar.component(.day, from: date) |
+|range | カレンダーの特定の範囲の情報を返す | calendar.range(of: .day, in: .month, for: date)!.count |
 |dateComponents | タイムゾーンに合わせた日付を返す | calendar.dateComponents(Set\<Calendar.Component\>([.year,.month,.day]),from: date) |
 | isDateInToday | 今日か? | calendar.isDateInToday(date) |
 | isDateInTomorrow | 明日か? | calendar.isDateInTomorrow(date) |
