@@ -1,0 +1,133 @@
+//
+//  ViewController.swift
+//  ios-foundation-nscalendar
+//
+//  Created by Kushida　Eiji on 2017/02/05.
+//  Copyright © 2017年 Kushida　Eiji. All rights reserved.
+//
+
+import UIKit
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    let tokyoTimeZone = "Asia/Tokyo"
+    var calendar = NSCalendar.current
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupTimeZone()
+        renderDate()
+    }
+    
+    //MARK:-option
+    
+    /// TimeZoneを設定する
+    private func setupTimeZone() {
+        calendar.timeZone = TimeZone(identifier: tokyoTimeZone)!
+    }
+    
+    /// TimeZoneのIDを取得する
+    private func currentTimeZone() -> String {
+        return calendar.timeZone.identifier
+    }
+    
+    /// 年を取得する
+    private func dateYear(date: Date) -> Int {
+        return calendar.component(.year, from: date)
+    }
+    
+    /// 月を取得する
+    private func dateMonth(date: Date) -> Int {
+        return calendar.component(.month, from: date)
+    }
+    
+    /// 日を取得する
+    private func dateDay(date: Date) -> Int {
+        return calendar.component(.day, from: date)
+    }
+    
+    /// 時間を取得する
+    private func dateHour(date: Date) -> Int {
+        return calendar.component(.hour, from: date)
+    }
+    
+    /// 分を取得する
+    private func dateMinute(date: Date) -> Int {
+        return calendar.component(.minute, from: date)
+    }
+    
+    /// 秒を取得する
+    private func dateSecond(date: Date) -> Int {
+        return calendar.component(.second, from: date)
+    }
+    
+    /// 曜日を取得する
+    private func dateWeekDay(date: Date) -> Int {
+        return calendar.component(.weekday, from: date)
+    }
+    
+    /// 年月日、時分秒を取得する（まとめて設定できる）
+    private func dateSettings(date: Date) -> DateComponents {
+        return calendar.dateComponents(Set<Calendar.Component>([.year,.month,.day,.hour,.minute,.second]),
+                                       from: date)
+    }
+    
+    /// 日付の差を取得する
+    private func diffDate(srcDate: Date, distDate: Date) -> Int {
+        return calendar.dateComponents([.day], from: srcDate, to: distDate).day!
+    }
+    
+    //MAKR:- For-Debug
+    private func renderDate() {
+        
+        //Do Something
+    }
+    
+    /// 該当の日付に更新する
+    private func updateDate(date: Date) -> DateComponents {
+        
+        var compontent = dateSettings(date: date)
+        compontent.year = 2016
+        compontent.month = 10
+        compontent.day = 3
+        return compontent
+    }
+    
+    /// 月の初日に更新する
+    private func updateFirstDate(date: Date) -> DateComponents {
+        
+        var compontent = dateSettings(date: date)
+        compontent.day = 1
+        return compontent
+    }
+    
+    /// 日付を表示する
+    private func renderDate(date: Date) {
+        
+        let component = dateSettings(date: date)
+        print("\(component.year!)/\(component.month!)/\(component.day!) \(component.hour!):\(component.minute!):\(component.second!)")
+    }
+    
+    /// DateComponentsをDateに変換する
+    private func compontentToDate(compontent: DateComponents) -> Date{
+        return calendar.date(from: compontent)!
+    }
+    
+    /// 該当月は、何週間あるか？
+    private func weekOfMonth(date: Date) -> Int {
+        
+        let compontent = updateFirstDate(date: date)
+        let firstDateOfMonth = compontentToDate(compontent: compontent)
+        return calendar.range(of: .weekOfMonth, in: .month, for: firstDateOfMonth)!.count
+    }
+    
+    /// 該当月の最終日は何日か？
+    private func endOfMonth(date: Date) -> Int {
+        return calendar.range(of: .day, in: .month, for: date)!.count
+    }
+}
+
+
