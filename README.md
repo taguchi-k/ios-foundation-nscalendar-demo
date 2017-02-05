@@ -21,7 +21,12 @@ NSTimeZone、NSLocale、Date、DateFormatter、DateComponent
 |---|---|---|
 |component | 日付を返す | calendar.component(.day, from: date) |
 |range | カレンダーの特定の範囲の情報を返す | calendar.component(.day, from: date) |
-|dateComponents | タイムゾーンに合わせた日付を返す | calendar.dateComponents(Set<Calendar.Component>([.year,.month,.day]),from: date) |
+|dateComponents | タイムゾーンに合わせた日付を返す | calendar.dateComponents(Set\<Calendar.Component\>([.year,.month,.day]),from: date) |
+| isDateInToday | 今日か? | calendar.isDateInToday(date) |
+| isDateInTomorrow | 明日か? | calendar.isDateInTomorrow(date) |
+| isDateInWeekend | 週末か? | calendar.isDateInWeekend(date) |
+| isDateInYesterday | 昨日か? | calendar.isDateInYesterday(date) |
+| isDate | 同日か? | calendar.isDate(date1, inSameDayAs: date2) |
 
 ## フレームワーク
 Foundation.framework
